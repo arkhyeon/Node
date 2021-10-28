@@ -13,6 +13,12 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+const mongoose = require('mongoose')
+mongoose.connect('mongodb+srv://arkhyeon:alflsek1@cluster0.r71ef.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+    useNewUrlParser: true, useUnifiedTopology: true
+}).then(() => console.log('MongoDB connected...'))
+.catch(error => console.log(error))
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -46,6 +52,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 module.exports = app;
 
